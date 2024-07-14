@@ -3,10 +3,10 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-      - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-      - aws configure set default.region $AWS_DEFAULT_REGION
-      - aws sts get-caller-identity # This will verify if the credentials are working
+      #- aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+      #- aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+      #- aws configure set default.region $AWS_DEFAULT_REGION
+      #- aws sts get-caller-identity # This will verify if the credentials are working
       - mvn clean install
       - echo Logging in to Amazon ECR...
       - aws --version
