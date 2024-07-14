@@ -3,11 +3,15 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+      - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+      - aws configure set default.region $AWS_DEFAULT_REGION
+      - aws sts get-caller-identity # This will verify if the credentials are working
       - mvn clean install
       - echo Logging in to Amazon ECR...
       - aws --version
       - REPOSITORY_URI=891376964922.dkr.ecr.eu-north-1.amazonaws.com/gskarthik-test
-      - aws ecr get-login-password --region ap-south-1 | docker login --username karthik.gksakthivel
+      - aws ecr get-login-password --region eu-south-1 | docker login --username karthik.gksakthivel
         --password-stdin $REPOSITORY_URI
       #- COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       #- IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
