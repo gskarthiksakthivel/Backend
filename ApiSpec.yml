@@ -1,0 +1,161 @@
+openapi: 3.0.1
+info:
+  title: Account and Customer Management API
+  description: API for managing accounts and customers
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api
+    description: Local server
+paths:
+  /accounts:
+    post:
+      summary: Create a new account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                customerId:
+                  type: integer
+                  example: 1
+                initialCredit:
+                  type: number
+                  format: double
+                  example: 100.0
+      responses:
+        '200':
+          description: Account created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accountId:
+                    type: integer
+                    example: 1
+                  customerId:
+                    type: integer
+                    example: 1
+                  balance:
+                    type: number
+                    format: double
+                    example: 100.0
+                  transactions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        transactionId:
+                          type: integer
+                          example: 1
+                        accountId:
+                          type: integer
+                          example: 1
+                        amount:
+                          type: number
+                          format: double
+                          example: 100.0
+                        date:
+                          type: string
+                          format: date-time
+                          example: '2023-07-10T10:00:00.000+00:00'
+  /customers/{customerId}:
+    get:
+      summary: Get customer information by ID
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Customer retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: John
+                  surname:
+                    type: string
+                    example: Doe
+  /customers:
+    get:
+      summary: Get all customers
+      responses:
+        '200':
+          description: Customers retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: John
+                    surname:
+                      type: string
+                      example: Doe
+  /customers/{customerId}/accounts:
+    get:
+      summary: Get all accounts of a customer by customer ID
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Accounts retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    accountId:
+                      type: integer
+                      example: 1
+                    customerId:
+                      type: integer
+                      example: 1
+                    balance:
+                      type: number
+                      format: double
+                      example: 100.0
+                    transactions:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          transactionId:
+                            type: integer
+                            example: 1
+                          accountId:
+                            type: integer
+                            example: 1
+                          amount:
+                            type: number
+                            format: double
+                            example: 100.0
+                          date:
+                            type: string
+                            format: date-time
+                            example: '2023-07-10T10:00:00.000+00:00'
