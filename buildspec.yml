@@ -2,8 +2,6 @@ version: 0.2
 
 env:
   variables:
-    AWS_ACCESS_KEY_ID: "AKIA47CRVCU5ER6AJ2FP"
-    AWS_SECRET_ACCESS_KEY: "AKIA47CRVCU5ER6AJ2FP"
     AWS_DEFAULT_REGION: "eu-north-1"
     REPOSITORY_URI: "891376964922.dkr.ecr.eu-north-1.amazonaws.com/gskarthik-test"
     IMAGE_TAG: "latest"
